@@ -1,0 +1,27 @@
+/* add your CSS here */
+#interesting-fact {
+  font-style: italic;
+}
+
+span {
+  font-weight: bold;
+}
+
+li {
+  list-style: none;
+}
+
+figcaption {
+  padding-bottom: 15px;
+}
+
+#container {
+  border: 2px solid black;
+  padding: 10px;
+}
+
+#card {
+  border: 1px solid green;
+}
+
+
