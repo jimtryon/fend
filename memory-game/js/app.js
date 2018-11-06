@@ -50,13 +50,15 @@ function shuffle(array) {
 
 const cards = document.querySelectorAll('.card');
 
-// Loop over the cards and add an event listener to each one
-// once the card is clicked, flip over the card 
 cards.forEach(function(card) {
+    card.addEventListener('click', function () {
 
-    card.addEventListener('click', function() {
         if (card.classList.contains('card')) {
-            card.classList.add('open', 'show');
+            flipCard(card);
         }
-    }); 
+    });   
 });
+
+function flipCard(card) {
+    card.classList.add('open', 'show');
+}
