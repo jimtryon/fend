@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-const openCards = [];
+let openCards = [];
 
 
 /*
@@ -51,16 +51,25 @@ function shuffle(array) {
 
 const cards = document.querySelectorAll('.card');
 
-cards.forEach(function(card) {
+cards.forEach(function (card) {
     card.addEventListener('click', function () {
 
         // If the card is one of our cards, flip it over and 
         // add it to the array of open cards 
         if (card.classList.contains('card')) {
-            flipCard(card);
-            addOpenCard(card);
+            // Only allow 2 cards to be flipped over
+            if (openCards.length < 2) {
+                flipCard(card);
+                addOpenCard(card);
+            }
+            if (openCards.length > 1) {
+                setTimeout(() => {
+                    openCards.forEach(card => card.classList.remove('open','show')); 
+                       openCards = [];
+                }, 500);
+            }
         }
-    });   
+    });
 });
 
 function flipCard(card) {
