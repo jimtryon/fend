@@ -1,6 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
+const openCards = [];
 
 
 /*
@@ -53,12 +54,19 @@ const cards = document.querySelectorAll('.card');
 cards.forEach(function(card) {
     card.addEventListener('click', function () {
 
+        // If the card is one of our cards, flip it over and 
+        // add it to the array of open cards 
         if (card.classList.contains('card')) {
             flipCard(card);
+            addOpenCard(card);
         }
     });   
 });
 
 function flipCard(card) {
     card.classList.add('open', 'show');
+}
+
+function addOpenCard(card) {
+    openCards.push(card);
 }
