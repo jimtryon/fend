@@ -63,10 +63,11 @@ cards.forEach(function (card) {
                 addOpenCard(card);
             }
             if (openCards.length > 1) {
-                setTimeout(() => {
-                    openCards.forEach(card => card.classList.remove('open','show')); 
-                       openCards = [];
-                }, 500);
+                // Check the card's symbol of the first two cards to see if they match 
+                checkCardMatch(card);
+            }
+            else {
+                hideCard();
             }
         }
     });
@@ -78,4 +79,22 @@ function flipCard(card) {
 
 function addOpenCard(card) {
     openCards.push(card);
+}
+
+function checkCardMatch(card) {
+    if (openCards[0].firstElementChild.className === openCards[1].firstElementChild.className) {
+        console.log("It's a match!");
+        openCards[0].classList.add('match');
+        openCards[1].classList.add('match');
+    }
+    else {
+        console.log("It's not a match!");
+    }
+}
+
+function hideCard() {
+    setTimeout(() => {
+        openCards.forEach(card => card.classList.remove('open', 'show'));
+        openCards = [];
+    }, 700);
 }
