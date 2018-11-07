@@ -39,6 +39,10 @@ function shuffle(newCards) {
     return newCards;
 }
 
+function addMoves() {
+    moveCounter += 1;
+    const moveCounterText = document.querySelector('.moves').innerHTML = moveCounter;
+}
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -50,6 +54,9 @@ function shuffle(newCards) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+ // Initialize move tracker
+ let moveCounter = 0;
 
 
 
@@ -65,21 +72,22 @@ cards.forEach(function (card) {
             // Only allow 2 cards to be flipped over
             // Don't allow flipping of the same card
             if (openCards.length < 2 && !openCards.includes(card)) {
-                flipCard();
-                addOpenCard();
+                flipCard(card);
+                addOpenCard(card);
             }
             if (openCards.length > 1) {
                 checkCardMatch();
+                addMoves();
             }
         }
     });
 });
 
-function flipCard() {
+function flipCard(card) {
     card.classList.add('open', 'show');
 }
 
-function addOpenCard() {
+function addOpenCard(card) {
     openCards.push(card);
 }
 
