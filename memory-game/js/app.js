@@ -3,28 +3,40 @@
  */
 let openCards = [];
 
+const cardDeck = document.querySelector('.deck');
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+function shuffleCards() {
+    /*
+     * Display the cards on the page
+     *   - shuffle the list of cards using the provided "shuffle" method below
+     */
+    const oldCards = Array.from(document.querySelectorAll(".deck li"));
+    const shuffledCards = shuffle(oldCards);
+    /*   - loop through each card and create its HTML
+     *   - add each card's HTML to the page
+     */
+    for (let card of shuffledCards) {
+        cardDeck.appendChild(card);
+    }
+}
+
+// Shuffle cards before starting the game
+shuffleCards();
 
 // Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length,
+function shuffle(newCards) {
+    var currentIndex = newCards.length,
         temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
+        temporaryValue = newCards[currentIndex];
+        newCards[currentIndex] = newCards[randomIndex];
+        newCards[randomIndex] = temporaryValue;
     }
 
-    return array;
+    return newCards;
 }
 
 
@@ -39,7 +51,10 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+
+
 const cards = document.querySelectorAll('.card');
+
 
 cards.forEach(function (card) {
     card.addEventListener('click', function () {
@@ -50,25 +65,25 @@ cards.forEach(function (card) {
             // Only allow 2 cards to be flipped over
             // Don't allow flipping of the same card
             if (openCards.length < 2 && !openCards.includes(card)) {
-                flipCard(card);
-                addOpenCard(card);
+                flipCard();
+                addOpenCard();
             }
             if (openCards.length > 1) {
-                checkCardMatch(card);
+                checkCardMatch();
             }
         }
     });
 });
 
-function flipCard(card) {
+function flipCard() {
     card.classList.add('open', 'show');
 }
 
-function addOpenCard(card) {
+function addOpenCard() {
     openCards.push(card);
 }
 
-function checkCardMatch(card) {
+function checkCardMatch() {
     // Check the card's symbols to see if the first two cards match and add class
     if (openCards[0].firstElementChild.className === openCards[1].firstElementChild.className) {
         console.log("It's a match!");
