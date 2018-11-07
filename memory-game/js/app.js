@@ -39,16 +39,6 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-// const grid = document.querySelector('.deck');
-
-// grid.addEventListener('click', event => {
-//     const target = event.target;
-
-//     if (target.classList.contains('card')) {
-//         target.classList.add('open', 'show');
-//     }
-// });
-
 const cards = document.querySelectorAll('.card');
 
 cards.forEach(function (card) {
@@ -58,15 +48,14 @@ cards.forEach(function (card) {
         // add it to the array of open cards 
         if (card.classList.contains('card')) {
             // Only allow 2 cards to be flipped over
-            if (openCards.length < 2) {
+            // Don't allow flipping of the same card
+            if (openCards.length < 2 && !openCards.includes(card)) {
                 flipCard(card);
                 addOpenCard(card);
             }
             if (openCards.length > 1) {
-                // Check the card's symbol of the first two cards to see if they match 
                 checkCardMatch(card);
-            }
-            else {
+            } else {
                 hideCard();
             }
         }
@@ -82,12 +71,12 @@ function addOpenCard(card) {
 }
 
 function checkCardMatch(card) {
+    // Check the card's symbols to see if the first two cards match and add class
     if (openCards[0].firstElementChild.className === openCards[1].firstElementChild.className) {
         console.log("It's a match!");
         openCards[0].classList.add('match');
         openCards[1].classList.add('match');
-    }
-    else {
+    } else {
         console.log("It's not a match!");
     }
 }
