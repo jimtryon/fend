@@ -55,8 +55,6 @@ cards.forEach(function (card) {
             }
             if (openCards.length > 1) {
                 checkCardMatch(card);
-            } else {
-                hideCard();
             }
         }
     });
@@ -78,6 +76,7 @@ function checkCardMatch(card) {
         openCards[1].classList.add('match');
     } else {
         console.log("It's not a match!");
+        hideCard();
     }
 }
 
