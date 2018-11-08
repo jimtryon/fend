@@ -94,6 +94,7 @@ function checkCardMatch() {
         console.log("It's a match!");
         openCards[0].classList.add('match');
         openCards[1].classList.add('match');
+        openCards = [];
     } else {
         console.log("It's not a match!");
         hideCard();
