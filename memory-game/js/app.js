@@ -50,8 +50,8 @@ function shuffle(newCards) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
- // Initialize move tracker
- let moveCounter = 0;
+// Initialize move tracker
+let moveCounter = 0;
 
 const cards = document.querySelectorAll('.card');
 
@@ -70,6 +70,7 @@ cards.forEach(function (card) {
             if (openCards.length > 1) {
                 checkCardMatch();
                 addMoves();
+                updateStars();
             }
         }
     });
@@ -106,4 +107,19 @@ function hideCard() {
 function addMoves() {
     moveCounter += 1;
     document.querySelector('.moves').innerHTML = moveCounter;
+}
+
+function updateStars() {
+    if (moveCounter === 5) {
+        removeStar();
+    } else if (moveCounter === 10) {
+        removeStar();
+    }
+}
+
+function removeStar() {
+    // Similar to the cards, it returns a NodeList
+    const stars = document.querySelectorAll(".stars li");
+    // Remove the first star in the list 
+    stars[0].parentNode.children[0].remove();
 }
