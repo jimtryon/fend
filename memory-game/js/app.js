@@ -39,11 +39,6 @@ function shuffle(newCards) {
     return newCards;
 }
 
-function addMoves() {
-    moveCounter += 1;
-    const moveCounterText = document.querySelector('.moves').innerHTML = moveCounter;
-}
-
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -106,4 +101,9 @@ function hideCard() {
         openCards.forEach(card => card.classList.remove('open', 'show'));
         openCards = [];
     }, 700);
+}
+
+function addMoves() {
+    moveCounter += 1;
+    document.querySelector('.moves').innerHTML = moveCounter;
 }
