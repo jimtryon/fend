@@ -110,9 +110,9 @@ function addMoves() {
 }
 
 function updateStars() {
-    if (moveCounter === 5) {
+    if (moveCounter === 10) {
         removeStar();
-    } else if (moveCounter === 10) {
+    } else if (moveCounter == 18) {
         removeStar();
     }
 }
