@@ -5,6 +5,7 @@ let openCards = [];
 
 let timerEnabled = false;
 let interval = 0;
+let gameStars = 0;
 
 const cardDeck = document.querySelector('.deck');
 
@@ -41,6 +42,8 @@ function shuffle(newCards) {
 
     return newCards;
 }
+
+gameStars = 3;
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -131,6 +134,7 @@ function removeStar() {
     const stars = document.querySelectorAll(".stars li");
     // Remove the first star in the list 
     stars[0].parentNode.children[0].remove();
+    gameStars--;
 }
 
 
@@ -206,6 +210,15 @@ const modal = document.querySelector(".modal");
 
 function toggleModal() {
     modal.classList.toggle('show-modal');
+
+    const modalTime = document.querySelector(".modal-time");
+    const gameTime = document.querySelector(".clock").innerHTML;
+    const modalMoves = document.querySelector(".modal-moves");
+    const modalStars = document.querySelector(".modal-stars");
+
+    modalTime.innerHTML = `Time: ${gameTime}`;
+    modalMoves.innerHTML = `Moves: ${moveCounter}`;
+    modalStars.innerHTML = `Stars: ${gameStars}`;
 }
 
 function onWindowClick(event) {
