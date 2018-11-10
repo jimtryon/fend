@@ -3,6 +3,8 @@
  */
 let openCards = [];
 
+let timerEnabled = false;
+
 const cardDeck = document.querySelector('.deck');
 
 function shuffleCards() {
@@ -61,6 +63,8 @@ cards.forEach(function (card) {
         // If the card is one of our cards, flip it over and 
         // add it to the array of open cards 
         if (card.classList.contains('card')) {
+
+
             // Only allow 2 cards to be flipped over
             // Don't allow flipping of the same card
             if (openCards.length < 2 && !openCards.includes(card)) {
@@ -77,6 +81,11 @@ cards.forEach(function (card) {
 });
 
 function flipCard(card) {
+    // Check if timer is running and start it
+    if (timerEnabled === false) {
+        startTimer();
+    }
+
     card.classList.add('open', 'show');
 }
 
@@ -122,4 +131,30 @@ function removeStar() {
     const stars = document.querySelectorAll(".stars li");
     // Remove the first star in the list 
     stars[0].parentNode.children[0].remove();
+}
+
+
+function startTimer() {
+    let sec = 0;
+    let min = 0;
+    let hour = 0;
+    let interval = 0;
+    const clockText = document.querySelector(".clock");
+
+
+    timerEnabled = true;
+    interval = setInterval(function () {
+        clockText.innerHTML = hour + " hour " + min + " minutes " +
+            sec + " seconds";
+            sec++;
+
+            // Add 1 minute after 60 seconds
+            if (sec === 60) {
+                min++;
+            }
+            // Add 1 hour after 60 minutes
+            if (min === 60) {
+                hour++;
+            }
+    }, 1000);
 }
