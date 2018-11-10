@@ -201,3 +201,22 @@ function restartGame() {
         stars[i].style.visibility = "visible";
     }
 }
+
+const modal = document.querySelector(".modal");
+
+function startModal() {
+    modal.classList.toggle('show-modal');
+}
+
+function onWindowClick(event) {
+    if (event.target === modal) {
+        startModal();
+    }
+}
+
+const closeButton = document.querySelector(".close-button");
+
+closeButton.addEventListener("click", startModal);
+window.addEventListener("click", onWindowClick);
+
+startModal();
