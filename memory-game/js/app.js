@@ -176,41 +176,41 @@ function stopTimer() {
 function restartGame() {
     const restart = document.querySelector(".restart");
 
-    restart.addEventListener("click", function () {
+    shuffleCards();
 
-        shuffleCards();
+    // Remove existing classes from cards
+    for (let i = 0; i < cards.length; i++) {
+        cardDeck.innerHTML = "";
 
-        // Remove existing classes from cards
-        for (let i = 0; i < cards.length; i++) {
-            cardDeck.innerHTML = "";
+        [].forEach.call(cards, function (item) {
+            cardDeck.appendChild(item);
+        });
 
-            [].forEach.call(cards, function (item) {
-                cardDeck.appendChild(item);
-            });
-
-            cards[i].classList.remove('show', 'open', 'match');
-        }
-
-        moveCounter = 0;
-        const moves = document.querySelector(".moves");
-        moves.innerHTML = moveCounter;
-
-        const clockText = document.querySelector(".clock");
-        let sec = 0;
-        let min = 0;
-        let hour = 0;
-
-        clockText.innerHTML = hour + " hour " + min + " minutes " +
-            sec + " seconds";
-        clearInterval(interval);
-    });
-
-    const stars = document.querySelectorAll(".stars li");
-
-    // Reset star rating to 3 stars
-    for (let i = 0; i < stars.length; i++) {
-        stars[i].style.visibility = "visible";
+        cards[i].classList.remove('show', 'open', 'match');
     }
+
+    moveCounter = 0;
+    const moves = document.querySelector(".moves");
+    moves.innerHTML = moveCounter;
+
+    const clockText = document.querySelector(".clock");
+    let sec = 0;
+    let min = 0;
+    let hour = 0;
+
+    clockText.innerHTML = hour + " hour " + min + " minutes " +
+        sec + " seconds";
+    clearInterval(interval);
+
+    const restartButton = document.querySelector(".modal-play-again");
+    restartButton.addEventListener("click", restartGame);
+}
+
+const stars = document.querySelectorAll(".stars li");
+
+// Reset star rating to 3 stars
+for (let i = 0; i < stars.length; i++) {
+    stars[i].style.visibility = "visible";
 }
 
 const modal = document.querySelector(".modal");
@@ -238,7 +238,7 @@ const cancelButton = document.querySelector(".modal-cancel");
 const playButton = document.querySelector(".modal-play-again");
 
 cancelButton.addEventListener("click", toggleModal);
-playButton.addEventListener("click", () => {
+playButton.addEventListener("click", function () {
     restartGame();
     toggleModal();
 });
