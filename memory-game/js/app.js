@@ -6,6 +6,8 @@ let openCards = [];
 let timerEnabled = false;
 let interval = 0;
 let gameStars = 0;
+let matchedCards = 0;
+const TOTAL_MATCHES = 8;
 
 const cardDeck = document.querySelector('.deck');
 
@@ -103,6 +105,11 @@ function checkCardMatch() {
         openCards[0].classList.add('match');
         openCards[1].classList.add('match');
         openCards = [];
+        matchedCards++;
+
+        if (matchedCards === TOTAL_MATCHES) {
+            endGame();
+        }
     } else {
         console.log("It's not a match!");
         hideCard();
@@ -237,5 +244,7 @@ playButton.addEventListener("click", () => {
 });
 window.addEventListener("click", onWindowClick);
 
-
-toggleModal();
+function endGame() {
+    stopTimer();
+    toggleModal();
+}
