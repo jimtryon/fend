@@ -65,7 +65,6 @@ cards.forEach(function (card) {
         // add it to the array of open cards 
         if (card.classList.contains('card')) {
 
-
             // Only allow 2 cards to be flipped over
             // Don't allow flipping of the same card
             if (openCards.length < 2 && !openCards.includes(card)) {
@@ -146,19 +145,59 @@ function startTimer() {
     interval = setInterval(function () {
         clockText.innerHTML = hour + " hour " + min + " minutes " +
             sec + " seconds";
-            sec++;
+        sec++;
 
-            // Add 1 minute after 60 seconds
-            if (sec === 60) {
-                min++;
-            }
-            // Add 1 hour after 60 minutes
-            if (min === 60) {
-                hour++;
-            }
+        // Add 1 minute after 60 seconds
+        if (sec === 60) {
+            min++;
+        }
+        // Add 1 hour after 60 minutes
+        if (min === 60) {
+            hour++;
+        }
     }, 1000);
 }
 
 function stopTimer() {
     clearTimeout(interval);
+}
+
+function restartGame() {
+    const restart = document.querySelector(".restart");
+
+    restart.addEventListener("click", function () {
+
+        shuffleCards();
+
+        // Remove existing classes from cards
+        for (let i = 0; i < cards.length; i++) {
+            cardDeck.innerHTML = "";
+
+            [].forEach.call(cards, function (item) {
+                cardDeck.appendChild(item);
+            });
+
+            cards[i].classList.remove('show', 'open', 'match');
+        }
+
+        moveCounter = 0;
+        const moves = document.querySelector(".moves");
+        moves.innerHTML = moveCounter;
+
+        const clockText = document.querySelector(".clock");
+        let sec = 0;
+        let min = 0;
+        let hour = 0;
+
+        clockText.innerHTML = hour + " hour " + min + " minutes " +
+            sec + " seconds";
+        clearInterval(interval);
+    });
+
+    const stars = document.querySelectorAll(".stars li");
+
+    // Reset star rating to 3 stars
+    for (let i = 0; i < stars.length; i++) {
+        stars[i].style.visibility = "visible";
+    }
 }
