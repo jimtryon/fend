@@ -204,19 +204,25 @@ function restartGame() {
 
 const modal = document.querySelector(".modal");
 
-function startModal() {
+function toggleModal() {
     modal.classList.toggle('show-modal');
 }
 
 function onWindowClick(event) {
     if (event.target === modal) {
-        startModal();
+        toggleModal();
     }
 }
 
-const closeButton = document.querySelector(".close-button");
+const cancelButton = document.querySelector(".modal-cancel");
+const playButton = document.querySelector(".modal-play-again");
 
-closeButton.addEventListener("click", startModal);
+cancelButton.addEventListener("click", toggleModal);
+playButton.addEventListener("click", () => {
+    restartGame();
+    toggleModal();
+});
 window.addEventListener("click", onWindowClick);
 
-startModal();
+
+toggleModal();
