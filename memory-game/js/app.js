@@ -4,6 +4,7 @@
 let openCards = [];
 
 let timerEnabled = false;
+let interval = 0;
 
 const cardDeck = document.querySelector('.deck');
 
@@ -138,7 +139,6 @@ function startTimer() {
     let sec = 0;
     let min = 0;
     let hour = 0;
-    let interval = 0;
     const clockText = document.querySelector(".clock");
 
 
@@ -157,4 +157,8 @@ function startTimer() {
                 hour++;
             }
     }, 1000);
+}
+
+function stopTimer() {
+    clearTimeout(interval);
 }
