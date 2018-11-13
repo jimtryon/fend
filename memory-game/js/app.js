@@ -71,16 +71,20 @@ cards.forEach(function (card) {
         // add it to the array of open cards 
         if (card.classList.contains('card')) {
 
-            // Only allow 2 cards to be flipped over
-            // Don't allow flipping of the same card
-            if (openCards.length < 2 && !openCards.includes(card)) {
-                flipCard(card);
-                addOpenCard(card);
-            }
-            if (openCards.length > 1) {
-                checkCardMatch();
-                addMoves();
-                updateStars();
+            // Check if the card is already opened
+            if (!card.classList.contains('open')) {
+
+                // Only allow 2 cards to be flipped over
+                // Don't allow flipping of the same card
+                if (openCards.length < 2 && !openCards.includes(card)) {
+                    flipCard(card);
+                    addOpenCard(card);
+                }
+                if (openCards.length > 1) {
+                    checkCardMatch();
+                    addMoves();
+                    updateStars();
+                }
             }
         }
     });
