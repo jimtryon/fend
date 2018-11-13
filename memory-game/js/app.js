@@ -2,6 +2,8 @@
  * Create a list that holds all of your cards
  */
 let openCards = [];
+// Initialize move tracker
+let moveCounter = 0;
 
 let timerEnabled = false;
 let interval = 0;
@@ -58,8 +60,7 @@ gameStars = 3;
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-// Initialize move tracker
-let moveCounter = 0;
+
 
 const cards = document.querySelectorAll('.card');
 
