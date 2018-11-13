@@ -185,12 +185,6 @@ function restartGame() {
 
     // Remove existing classes from cards
     for (let i = 0; i < cards.length; i++) {
-        cardDeck.innerHTML = "";
-
-        [].forEach.call(cards, function (item) {
-            cardDeck.appendChild(item);
-        });
-
         cards[i].classList.remove('show', 'open', 'match');
     }
 
